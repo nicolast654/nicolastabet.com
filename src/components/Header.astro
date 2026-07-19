@@ -1,0 +1,64 @@
+---
+import { SITE, NAV } from "../consts";
+
+// Highlight the current section. Normalize trailing slashes so "/blog" and
+// "/blog/" (and nested posts) all resolve to the Blog tab.
+const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
+---
+
+<header class="site-header wrap">
+  <a href="/" class="brand">{SITE.title}</a>
+  <nav aria-label="Primary">
+    <ul>
+      {
+        NAV.filter((item) => item.href !== "/").map((item) => (
+          <li>
+            <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block: var(--space-6);
+  }
+  .brand {
+    color: var(--text);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    font-size: var(--text-lg);
+  }
+  .brand:hover {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  nav ul {
+    display: flex;
+    gap: var(--space-6);
+    list-style: none;
+    padding: 0;
+  }
+  nav a {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+  nav a:hover,
+  nav a[aria-current="page"] {
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav a[aria-current="page"] {
+    font-weight: 600;
+  }
+</style>

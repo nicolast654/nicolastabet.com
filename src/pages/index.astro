@@ -1,5 +1,40 @@
 ---
-// Placeholder — replaced by the real home page after the design-system phase.
+// Temporary design-system preview. The real home page comes next, after review.
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<h1>nicolastabet.com</h1>
+<BaseLayout title="Nicolas Tabet">
+  <div class="prose">
+    <h1>Nicolas Tabet</h1>
+  <p>
+    Systems-focused engineer. I work close to the metal — C, computer
+    architecture, and the infrastructure that runs underneath everything else.
+    Right now I'm a TA for Purdue's CS240 and heading to Columbia for an
+    <a href="/about">MSCS in software systems</a>.
+  </p>
+
+  <h2>Type hierarchy</h2>
+  <p>
+    This block only exists so the design system is reviewable. The body sits at
+    a comfortable reading measure with generous line-height, one accent color
+    for <a href="/">links</a>, and a restrained neutral palette that flips with
+    <code>prefers-color-scheme</code>.
+  </p>
+
+  <h3>A third-level heading</h3>
+  <ul>
+    <li>Generous whitespace, text-first layout.</li>
+    <li>Self-hosted Inter, preloaded, zero third-party requests.</li>
+    <li>No JavaScript shipped on this page.</li>
+  </ul>
+
+  <blockquote>
+    Restraint is a feature. The content does the work.
+  </blockquote>
+
+  <pre><code>int main(void) &#123;
+    write(1, "hello\n", 6);
+    return 0;
+&#125;</code></pre>
+  </div>
+</BaseLayout>
