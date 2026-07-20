@@ -66,14 +66,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #101010;
-    --bg-subtle: #1a1a19;
-    --text: #eaeae7;
-    --text-muted: #9a9a93;
-    --border: #2a2a27;
+    --bg: #2e3037;
+    --bg-subtle: #383b43;
+    --text: #e8e9ec;
+    --text-muted: #a3a5ae;
+    --border: #454852;
     --accent: #7aa2f7;
-    --accent-hover: #a3c0ff;
-    --selection: #23324f;
+    --accent-hover: #a6c1ff;
+    --selection: #3c4a68;
   }
 }
 
