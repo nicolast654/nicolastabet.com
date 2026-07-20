@@ -18,7 +18,7 @@ export const NAV: { label: string; href: string }[] = [
 ];
 
 export const SOCIALS: { label: string; href: string }[] = [
-  { label: "GitHub", href: "https://github.com/nicolastabet" },
+  { label: "GitHub", href: "https://github.com/nicolast654" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/nicolastabet" },
   { label: "Email", href: "mailto:nicolast654@gmail.com" },
   { label: "Résumé", href: "/resume.pdf" },

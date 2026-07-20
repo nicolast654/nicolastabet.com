@@ -25,7 +25,7 @@ export const PROJECTS: Project[] = [
     name: "memtrack",
     tagline: "An LD_PRELOAD leak tracker that shims malloc and free at runtime.",
     description:
-      "Interposes on the allocator with LD_PRELOAD, bootstraps the real symbols through dlsym, and records every live allocation in a hash table with linear probing that never calls malloc itself — it can't, it's the thing replacing malloc. Dumps whatever leaked at exit.",
+      "Interposes on the allocator process-wide with LD_PRELOAD — no recompiling the target — and records every live allocation in an open-addressing hash table with linear probing and tombstone deletion that never calls malloc itself, because it can't; it's the thing replacing malloc. At exit it reports leaks down to file and line by forking to addr2line, resolving ASLR-shifted addresses against /proc/self/maps and capturing a stack trace per allocation.",
     tech: ["C", "LD_PRELOAD", "dlsym"],
     featured: true,
   },

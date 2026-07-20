@@ -1,0 +1,224 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Experience and education live next to the markup that renders them — this is
+// the only page that uses them, so a shared data module would be overkill.
+const experience = [
+  {
+    role: "Undergraduate Researcher — SecArch Lab",
+    org: "Purdue University",
+    period: "2025 – 2026",
+    blurb:
+      "Systems research with Prof. Kazem Taram on LLM-driven design-space exploration of branch predictors — evolving predictor designs with automated, simulation-in-the-loop search.",
+  },
+  {
+    role: "Teaching Assistant & Course Developer — CS 240",
+    org: "Purdue University",
+    period: "2025 – 2026",
+    blurb:
+      "Run weekly lab sections for Purdue's C programming course and help design the assignments, reference solutions, and autograders — memory management, data structures, and debugging.",
+  },
+  {
+    role: "Lead Full-Stack Engineer",
+    org: "ZIPPY · Montreal",
+    period: "2025 – 2026",
+    blurb:
+      "Built and shipped the core platform end-to-end — frontend, backend, and database — for a laundry-delivery startup, defining clean API contracts and keeping mobile and backend in sync through live operations.",
+  },
+  {
+    role: "Software Engineer Intern",
+    org: "Aboard AI · New York",
+    period: "2025",
+    blurb:
+      "Backend services and REST APIs for a commercial HR platform (Next.js, Express, TypeScript) — scheduling, approvals, and organizational workflows.",
+  },
+  {
+    role: "Software Engineer Intern",
+    org: "Rix Institute · London",
+    period: "2024",
+    blurb:
+      "Shipped a PDF-export feature and a concurrent management command for a Django social platform built for people with disabilities, working through undocumented legacy code.",
+  },
+  {
+    role: "Software Engineer Intern",
+    org: "Murex · Paris",
+    period: "2023",
+    blurb:
+      "Built an IntelliJ plugin in Java for an in-house language to streamline developer workflows.",
+  },
+];
+
+const education = [
+  {
+    school: "Columbia University",
+    detail: "M.S. in Computer Science, Software Systems track",
+    period: "2026 – 2027",
+  },
+  {
+    school: "Purdue University",
+    detail:
+      "B.S. in Computer Science & Mathematics (double major) · GPA 3.87 · Dean's List",
+    period: "2022 – 2026",
+  },
+];
+
+const coursework = [
+  "Operating Systems",
+  "Systems Programming",
+  "Computer Architecture",
+  "Compilers",
+  "Analysis of Algorithms",
+  "Machine Learning",
+  "Probability",
+  "Linear Algebra",
+  "Abstract Algebra",
+  "Real Analysis",
+];
+
+const skills = [
+  "C",
+  "C++",
+  "Java",
+  "Python",
+  "TypeScript",
+  "Linux",
+  "Git",
+  "SQL",
+  "React",
+];
+---
+
+<BaseLayout
+  title="About"
+  description="Nicolas Tabet — systems-focused engineer. Background, experience, and education."
+>
+  <div class="prose">
+    <h1>About</h1>
+    <p>
+      I'm a systems-focused engineer. What I like most is the layer where
+      software meets the machine it runs on — memory, processes, the kernel
+      boundary, the network underneath — and understanding it well enough to
+      build the thing from scratch rather than take it on faith.
+    </p>
+    <p>
+      I just finished a double major in Computer Science and Mathematics at
+      Purdue, where I spent two years as a TA and course developer for CS 240,
+      the C programming course, and worked in the SecArch lab on applying
+      language models to computer-architecture design problems. This fall I'm
+      starting Columbia's MSCS on the software systems track.
+    </p>
+    <p>
+      Alongside school I've built for real users — most recently leading the
+      platform for a delivery startup — and I run a small homelab that hosts my
+      own services, including this site. I grew up across the US, Paris, and
+      Lebanon, and work in English, French, and Arabic.
+    </p>
+  </div>
+
+  <section class="block">
+    <h2>Experience</h2>
+    <ul class="items">
+      {
+        experience.map((job) => (
+          <li>
+            <div class="row">
+              <span class="primary">{job.role}</span>
+              <span class="period">{job.period}</span>
+            </div>
+            <div class="secondary">{job.org}</div>
+            <p>{job.blurb}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="block">
+    <h2>Education</h2>
+    <ul class="items">
+      {
+        education.map((ed) => (
+          <li>
+            <div class="row">
+              <span class="primary">{ed.school}</span>
+              <span class="period">{ed.period}</span>
+            </div>
+            <div class="secondary">{ed.detail}</div>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="coursework">
+      <span class="label">Coursework</span>{coursework.join(" · ")}
+    </p>
+  </section>
+
+  <section class="block">
+    <h2>Skills &amp; languages</h2>
+    <p class="skills">{skills.join(" · ")}</p>
+    <p class="muted">English, French, and Arabic — all fluent.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .block {
+    margin-block: var(--space-16);
+  }
+  .block h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-6);
+  }
+
+  .items {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .primary {
+    font-weight: 600;
+    color: var(--text);
+  }
+  .period {
+    flex-shrink: 0;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+  .secondary {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    margin-top: var(--space-1);
+  }
+  .items p {
+    margin-top: var(--space-2);
+    color: var(--text-muted);
+    max-width: 42rem;
+  }
+
+  .coursework {
+    margin-top: var(--space-6);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.8;
+  }
+  .label {
+    display: inline-block;
+    margin-right: var(--space-3);
+    color: var(--text);
+    font-weight: 600;
+  }
+  .skills {
+    color: var(--text);
+  }
+  .muted {
+    color: var(--text-muted);
+    margin-top: var(--space-3);
+  }
+</style>
