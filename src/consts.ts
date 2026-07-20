@@ -4,7 +4,7 @@
 export const SITE = {
   title: "Nicolas Tabet",
   description:
-    "Systems-focused engineer. C, computer architecture, and infrastructure. Writing about low-level software and the things I build.",
+    "Systems-focused engineer working in operating systems, C, and infrastructure. Writing about low-level software and the things I build.",
   author: "Nicolas Tabet",
   url: "https://nicolastabet.com",
   locale: "en",

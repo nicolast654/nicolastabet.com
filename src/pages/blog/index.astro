@@ -1,0 +1,83 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+
+const posts = (await getCollection("blog"))
+  .filter((p) => (import.meta.env.PROD ? !p.data.draft : true))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+  title="Blog"
+  description="Writing by Nicolas Tabet on operating systems, C, and systems software."
+>
+  <div class="prose intro">
+    <h1>Blog</h1>
+    <p>Notes on operating systems, C, and whatever I'm taking apart lately.</p>
+  </div>
+
+  {
+    posts.length > 0 ? (
+      <ul class="items">
+        {posts.map((post) => (
+          <li>
+            <div class="row">
+              <h2 class="title">
+                <a href={`/blog/${post.id}`}>{post.data.title}</a>
+              </h2>
+              <FormattedDate date={post.data.pubDate} />
+            </div>
+            <p class="desc">{post.data.description}</p>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="empty">No posts yet. First ones are on the way.</p>
+    )
+  }
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-bottom: var(--space-16);
+  }
+
+  .items {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+  }
+  .title a {
+    color: var(--text);
+  }
+  .title a:hover {
+    color: var(--accent);
+  }
+  .row time {
+    flex-shrink: 0;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+  .desc {
+    margin-top: var(--space-2);
+    color: var(--text-muted);
+    max-width: 42rem;
+  }
+
+  .empty {
+    color: var(--text-muted);
+  }
+</style>

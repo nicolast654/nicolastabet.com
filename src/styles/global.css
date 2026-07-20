@@ -181,6 +181,19 @@ pre code {
   padding: 0;
 }
 
+/* Shiki dual-theme tokens. We keep our own --bg-subtle surface (set on `pre`
+   above) and only pull the syntax colors from the active theme. */
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light);
+}
+@media (prefers-color-scheme: dark) {
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-dark);
+  }
+}
+
 blockquote {
   border-left: 3px solid var(--border);
   padding-left: var(--space-4);
