@@ -18,15 +18,12 @@ const posts = (await getCollection("blog"))
   <section class="intro">
     <h1>Hi, I'm Nicolas.</h1>
     <p>
-      I'm a systems-focused engineer who likes working close to the metal — C,
-      computer architecture, and the infrastructure everything else runs on. I
-      just finished a CS and Math double major at Purdue, where I TA the C
-      programming course, and this fall I'm starting <a href="/about">Columbia's
-      MSCS</a> on the software systems track.
-    </p>
-    <p class="muted">
-      I split my time between the US, Paris, and Lebanon — in English, French,
-      and Arabic.
+      I'm a systems-focused engineer. I like working low in the stack, in
+      operating systems and C, and on the infrastructure that everything else
+      runs on. I just finished a CS and Math double major at Purdue, where I TA
+      the C programming course, and this fall I'm starting <a href="/about"
+        >Columbia's MSCS</a
+      > on the software systems track.
     </p>
     <ul class="links">
       {
@@ -97,12 +94,6 @@ const posts = (await getCollection("blog"))
   }
   .intro p {
     max-width: 38rem;
-  }
-  .intro p + p {
-    margin-top: var(--space-4);
-  }
-  .muted {
-    color: var(--text-muted);
   }
 
   .links {
