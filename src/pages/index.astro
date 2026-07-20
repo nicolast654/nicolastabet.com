@@ -1,40 +1,174 @@
 ---
-// Temporary design-system preview. The real home page comes next, after review.
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import { PROJECTS } from "../data/projects";
+import { SOCIALS } from "../consts";
+
+const featured = PROJECTS.filter((p) => p.featured);
+
+// Hide drafts in the production build; keep them visible while developing.
+const posts = (await getCollection("blog"))
+  .filter((p) => import.meta.env.PROD ? !p.data.draft : true)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 ---
 
 <BaseLayout title="Nicolas Tabet">
-  <div class="prose">
-    <h1>Nicolas Tabet</h1>
-  <p>
-    Systems-focused engineer. I work close to the metal — C, computer
-    architecture, and the infrastructure that runs underneath everything else.
-    Right now I'm a TA for Purdue's CS240 and heading to Columbia for an
-    <a href="/about">MSCS in software systems</a>.
-  </p>
+  <section class="intro">
+    <h1>Hi, I'm Nicolas.</h1>
+    <p>
+      I'm a systems-focused engineer who likes working close to the metal — C,
+      computer architecture, and the infrastructure everything else runs on. I
+      just finished a CS and Math double major at Purdue, where I TA the C
+      programming course, and this fall I'm starting <a href="/about">Columbia's
+      MSCS</a> on the software systems track.
+    </p>
+    <p class="muted">
+      I split my time between the US, Paris, and Lebanon — in English, French,
+      and Arabic.
+    </p>
+    <ul class="links">
+      {
+        SOCIALS.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 
-  <h2>Type hierarchy</h2>
-  <p>
-    This block only exists so the design system is reviewable. The body sits at
-    a comfortable reading measure with generous line-height, one accent color
-    for <a href="/">links</a>, and a restrained neutral palette that flips with
-    <code>prefers-color-scheme</code>.
-  </p>
+  <section class="block">
+    <div class="block-head">
+      <h2>Selected projects</h2>
+      <a href="/projects">All projects →</a>
+    </div>
+    <ul class="items">
+      {
+        featured.map((p) => (
+          <li>
+            <div class="item-head">
+              <span class="name">
+                {p.href ? <a href={p.href}>{p.name}</a> : p.name}
+              </span>
+              <span class="tech">{p.tech.join(" · ")}</span>
+            </div>
+            <p>{p.tagline}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 
-  <h3>A third-level heading</h3>
-  <ul>
-    <li>Generous whitespace, text-first layout.</li>
-    <li>Self-hosted Inter, preloaded, zero third-party requests.</li>
-    <li>No JavaScript shipped on this page.</li>
-  </ul>
-
-  <blockquote>
-    Restraint is a feature. The content does the work.
-  </blockquote>
-
-  <pre><code>int main(void) &#123;
-    write(1, "hello\n", 6);
-    return 0;
-&#125;</code></pre>
-  </div>
+  <section class="block">
+    <div class="block-head">
+      <h2>Writing</h2>
+      <a href="/blog">All posts →</a>
+    </div>
+    {
+      posts.length > 0 ? (
+        <ul class="items">
+          {posts.map((post) => (
+            <li>
+              <div class="item-head">
+                <span class="name">
+                  <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                </span>
+                <FormattedDate date={post.data.pubDate} />
+              </div>
+              <p>{post.data.description}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="muted">First posts are on the way.</p>
+      )
+    }
+  </section>
 </BaseLayout>
+
+<style>
+  .intro {
+    margin-block: var(--space-8) var(--space-16);
+  }
+  .intro h1 {
+    margin-bottom: var(--space-6);
+  }
+  .intro p {
+    max-width: 38rem;
+  }
+  .intro p + p {
+    margin-top: var(--space-4);
+  }
+  .muted {
+    color: var(--text-muted);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-6);
+    font-size: var(--text-sm);
+  }
+
+  .block {
+    margin-block: var(--space-16);
+  }
+  .block-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+  .block-head h2 {
+    font-size: var(--text-xl);
+  }
+  .block-head a {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .block-head a:hover {
+    color: var(--accent);
+  }
+
+  .items {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  .item-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .name {
+    font-weight: 600;
+    color: var(--text);
+  }
+  .name a {
+    color: var(--text);
+  }
+  .name a:hover {
+    color: var(--accent);
+  }
+  .item-head .tech,
+  .item-head time {
+    flex-shrink: 0;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+  .items p {
+    margin-top: var(--space-1);
+    color: var(--text-muted);
+    max-width: 42rem;
+  }
+</style>
