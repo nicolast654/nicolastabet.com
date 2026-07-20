@@ -1,0 +1,98 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { PROJECTS } from "../data/projects";
+---
+
+<BaseLayout
+  title="Projects"
+  description="Systems projects by Nicolas Tabet: allocators, an LD_PRELOAD leak tracker, a homelab, and more, mostly in C."
+>
+  <div class="prose intro">
+    <h1>Projects</h1>
+    <p>
+      Mostly systems work in C. A few of these were course projects, so the
+      source isn't public, but the writeups say what they do.
+    </p>
+  </div>
+
+  <ul class="items">
+    {
+      PROJECTS.map((p) => (
+        <li>
+          <div class="row">
+            <h2 class="name">
+              {p.href ? <a href={p.href}>{p.name}</a> : p.name}
+            </h2>
+            {p.course && <span class="badge">coursework</span>}
+          </div>
+          <p class="desc">{p.description}</p>
+          <ul class="tech">
+            {p.tech.map((t) => (
+              <li>{t}</li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-bottom: var(--space-16);
+  }
+
+  .items {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+  }
+  .name {
+    font-size: var(--text-lg);
+    font-weight: 600;
+  }
+  .name a {
+    color: var(--text);
+  }
+  .name a:hover {
+    color: var(--accent);
+  }
+
+  .badge {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.05em 0.6em;
+  }
+
+  .desc {
+    margin-top: var(--space-3);
+    max-width: 42rem;
+  }
+
+  .tech {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .tech li {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    background: var(--bg-subtle);
+    border-radius: 4px;
+    padding: 0.1em 0.5em;
+  }
+</style>
