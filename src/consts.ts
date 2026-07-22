@@ -13,7 +13,7 @@ export const SITE = {
 export const NAV: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
-  { label: "Blog", href: "/blog" },
+  // { label: "Blog", href: "/blog" }, keep out of reach before first blog post
   { label: "About", href: "/about" },
 ];
 
