@@ -23,14 +23,14 @@ const posts = (await getCollection("blog"))
             everything else runs on. I'm also curious about most things
             adjacent to it, from AI/ML to running infrastructure at scale.
             I've led full-stack engineering at a startup and interned at Murex,
-            Rix, and Aboard AI. This fall I'm starting <a href="https://www.cs.columbia.edu/education/ms/" target="_blank"">Columbia's MSCS</a> on the
+            Rix, and Aboard AI. This fall I'm starting <a href="https://www.cs.columbia.edu/education/ms/" target="_blank">Columbia's MSCS</a> on the
             software systems track.
         </p>
     <ul class="links">
       {
         SOCIALS.map((item) => (
           <li>
-            <a href={item.href}>{item.label}</a>
+            <a href={item.href} target="_blank">{item.label}</a>
           </li>
         ))
       }
@@ -58,7 +58,7 @@ const posts = (await getCollection("blog"))
       }
     </ul>
   </section>
-
+    <!--
   <section class="block">
     <div class="block-head">
       <h2>Writing</h2>
@@ -83,7 +83,8 @@ const posts = (await getCollection("blog"))
         <p class="muted">First posts are on the way.</p>
       )
     }
-  </section>
+</section>
+-->
 </BaseLayout>
 
 <style>

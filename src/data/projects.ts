@@ -50,8 +50,7 @@ export const PROJECTS: Project[] = [
     {
         name: "Unix shell",
         tagline: "A shell in C with pipes, redirection, and job control.",
-        description: "Unix shell: " +
-            "A shell in C with a Lex/Yacc parser: piping, redirection, backgrounding, subshells, wildcard and environment expansion. Also built my own line editor and command history from raw terminal input, no readline.",
+        description: "A shell in C with a Lex/Yacc parser: piping, redirection, backgrounding, subshells, wildcard and environment expansion. Also built my own line editor and command history from raw terminal input, no readline.",
         tech: ["C", "processes", "POSIX"],
         course: "CS 252, Purdue",
     },
