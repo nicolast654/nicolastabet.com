@@ -33,4 +33,4 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: deploy
-        run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" dist/ nicolastabet@nanode.tailc46225.ts.net>:/srv/stacks/portfolio/dist/
+        run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" dist/ nicolastabet@nanode.tailc46225.ts.net:/srv/stacks/portfolio/dist/
